@@ -1,8 +1,9 @@
 # ☕ Coffee Budapest - Website
 
 **Live Demo:** [https://mohdaasif97.github.io/Coffeewebsite_pages/](https://mohdaasif97.github.io/Coffeewebsite_pages/)
+I am currently studying in Budapest so this website is about budapest
 
-A beautifully designed static website showcasing the best coffee shops in Budapest. I created this project to demonstrate modern web design techniques and deployed it using GitHub Pages.
+As a student currently studying in Budapest, I created this beautifully designed static website showcasing the best coffee shops in the city. I developed this project to demonstrate modern web design techniques and deployed it using GitHub Pages
 
 ## 🚀 Features
 
