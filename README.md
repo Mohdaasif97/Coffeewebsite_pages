@@ -5,14 +5,14 @@ I am currently studying in Budapest so this website is about budapest
 
 As a student currently studying in Budapest, I created this beautifully designed static website showcasing the best coffee shops in the city. I developed this project to demonstrate modern web design techniques and deployed it using GitHub Pages
 
-## 🚀 Features
+## Features
 
 - **Responsive Design** - Works seamlessly on all devices
 - **Interactive Filtering** - Filter coffee shops by category (Cozy, Modern, Traditional, Budget)
 - **Smooth Animations** - Floating cards, hover effects, and subtle parallax
 - **Modern UI** - Glassmorphism effects with warm coffee-inspired colors
 
-## 📱 Deployment with GitHub Pages
+##  Deployment with GitHub Pages
 
 I deployed this website using GitHub Pages, which makes it super easy to host static websites for free:
 
@@ -24,7 +24,7 @@ I deployed this website using GitHub Pages, which makes it super easy to host st
 
 GitHub Pages automatically rebuilds and deploys whenever I push changes to the main branch - no complex CI/CD setup needed!
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 /
