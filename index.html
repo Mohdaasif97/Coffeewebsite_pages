@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Budapest - Best Coffee Shops in the City</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #2c1810 0%, #8b4513 100%);
+            min-height: 100vh;
+            color: #f5f5dc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #deb887;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #f5deb3;
+            font-style: italic;
+        }
+
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .coffee-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(222, 184, 135, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coffee-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(222, 184, 135, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .coffee-card:hover::before {
+            opacity: 1;
+        }
+
+        .coffee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(222, 184, 135, 0.6);
+        }
+
+        .coffee-name {
+            font-size: 1.5rem;
+            color: #deb887;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .coffee-location {
+            color: #f5deb3;
+            margin-bottom: 1rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stars {
+            color: #daa520;
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .rating-text {
+            color: #f5deb3;
+        }
+
+        .review-text {
+            margin-bottom: 1rem;
+            color: #f5f5dc;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tag {
+            background: rgba(222, 184, 135, 0.2);
+            color: #deb887;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(222, 184, 135, 0.3);
+        }
+
+        .price-range {
+            color: #90ee90;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(222, 184, 135, 0.2);
+            color: #deb887;
+            border: 1px solid rgba(222, 184, 135, 0.5);
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(222, 184, 135, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            color: #d2b48c;
+            border-top: 1px solid rgba(222, 184, 135, 0.3);
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 10px 30px rgba(218, 165, 32, 0.4); }
+            100% { box-shadow: 0 10px 40px rgba(218, 165, 32, 0.8), 0 0 20px rgba(218, 165, 32, 0.6); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .coffee-card {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: calc(var(--index) * 0.5s);
+        }
+
+        @media (max-width: 768px) {
+            .coffee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="background: linear-gradient(45deg, #daa520, #b8860b, #cd853f); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #daa520; box-shadow: 0 10px 30px rgba(218, 165, 32, 0.4); animation: glow 2s ease-in-out infinite alternate;">
+                <h2 style="color: #2c1810; font-size: 2.5rem; font-weight: bold; text-align: center; margin: 0; text-shadow: 2px 2px 4px rgba(255,255,255,0.3); letter-spacing: 2px; animation: bounce 2s infinite;">
+                    ✨ WELCOME ELEVATE LABS FROM AASIF ✨
+                </h2>
+            </div>
+            <h1>☕ Coffee Budapest</h1>
+            <p class="subtitle">Discovering the finest coffee experiences in the city</p>
+        </header>
+
+        <div class="filter-section">
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterShops('all')">All Shops</button>
+                <button class="filter-btn" onclick="filterShops('cozy')">Cozy</button>
+                <button class="filter-btn" onclick="filterShops('modern')">Modern</button>
+                <button class="filter-btn" onclick="filterShops('traditional')">Traditional</button>
+                <button class="filter-btn" onclick="filterShops('budget')">Budget Friendly</button>
+            </div>
+        </div>
+
+        <div class="coffee-grid" id="coffeeGrid">
+            <div class="coffee-card" data-category="cozy traditional" style="--index: 0">
+                <h3 class="coffee-name">Central Kávéház</h3>
+                <p class="coffee-location">📍 Károlyi Mihály u. 9, District V</p>
+                <div class="rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text">4.8/5</span>
+                </div>
+                <p class="review-text">A legendary coffeehouse that's been serving Budapest since 1887. The historic ambiance is unmatched, with marble tables, crystal chandeliers, and live piano music. Their signature coffee blend is rich and complex, perfect for a leisurely afternoon. The apple strudel is heavenly!</p>
+                <div class="tags">
+                    <span class="tag">Historic</span>
+                    <span class="tag">Live Music</span>
+                    <span class="tag">Desserts</span>
+                    <span class="tag">Traditional</span>
+                </div>
+                <div class="price-range">💰💰💰 Premium</div>
+            </div>
+
+            <div class="coffee-card" data-category="modern" style="--index: 1">
+                <h3 class="coffee-name">Espresso Embassy</h3>
+                <p class="coffee-location">📍 Arany János u. 15, District V</p>
+                <div class="rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text">4.7/5</span>
+                </div>
+                <p class="review-text">Third-wave coffee at its finest! This sleek, minimalist space serves expertly crafted single-origin coffees. The baristas are true artists who take their craft seriously. Their flat white is perfection in a cup, and they offer excellent coffee education sessions.</p>
+                <div class="tags">
+                    <span class="tag">Third Wave</span>
+                    <span class="tag">Single Origin</span>
+                    <span class="tag">Minimalist</span>
+                    <span class="tag">Coffee Education</span>
+                </div>
+                <div class="price-range">💰💰 Moderate</div>
+            </div>
+
+            <div class="coffee-card" data-category="cozy budget" style="--index: 2">
+                <h3 class="coffee-name">Magvető Café</h3>
+                <p class="coffee-location">📍 Váci u. 20, District V</p>
+                <div class="rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-text">4.4/5</span>
+                </div>
+                <p class="review-text">A cozy literary-themed café perfect for book lovers and students. Walls lined with books, comfortable armchairs, and excellent Wi-Fi make it ideal for working or reading. Their homemade cakes are delicious, and the coffee is consistently good at great prices.</p>
+                <div class="tags">
+                    <span class="tag">Books</span>
+                    <span class="tag">WiFi</span>
+                    <span class="tag">Study Friendly</span>
+                    <span class="tag">Homemade Cakes</span>
+                </div>
+                <div class="price-range">💰 Budget</div>
+            </div>
+
+            <div class="coffee-card" data-category="modern" style="--index: 3">
+                <h3 class="coffee-name">My Little Melbourne</h3>
+                <p class="coffee-location">📍 Madách Imre tér 3, District V</p>
+                <div class="rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text">4.9/5</span>
+                </div>
+                <p class="review-text">Australian-style coffee culture meets Budapest charm. Outstanding flat whites and cortados, plus amazing brunch options. The avocado toast is Instagram-worthy and delicious. Popular with expats and locals alike. Weekend brunch gets busy, but it's worth the wait!</p>
+                <div class="tags">
+                    <span class="tag">Australian Style</span>
+                    <span class="tag">Brunch</span>
+                    <span class="tag">Avocado Toast</span>
+                    <span class="tag">Trendy</span>
+                </div>
+                <div class="price-range">💰💰 Moderate</div>
+            </div>
+
+            <div class="coffee-card" data-category="traditional cozy" style="--index: 4">
+                <h3 class="coffee-name">Café Gerbeaud</h3>
+                <p class="coffee-location">📍 Vörösmarty tér 7, District V</p>
+                <div class="rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-text">4.3/5</span>
+                </div>
+                <p class="review-text">The most famous coffeehouse in Budapest, operating since 1858. Opulent Belle Époque interior with gold details and marble columns. Famous for their handmade chocolates and traditional Hungarian pastries. A bit touristy but the history and atmosphere are unbeatable.</p>
+                <div class="tags">
+                    <span class="tag">Famous</span>
+                    <span class="tag">Chocolates</span>
+                    <span class="tag">Historic</span>
+                    <span class="tag">Pastries</span>
+                </div>
+                <div class="price-range">💰💰💰 Premium</div>
+            </div>
+
+            <div class="coffee-card" data-category="modern budget" style="--index: 5">
+                <h3 class="coffee-name">Kontakt Bar & Café</h3>
+                <p class="coffee-location">📍 Dob u. 20, District VII</p>
+                <div class="rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-text">4.5/5</span>
+                </div>
+                <p class="review-text">Hip café in the Jewish Quarter with an industrial-chic design. Great for remote work during the day, transforms into a lively bar at night. Excellent value for money with good coffee and creative cocktails. The pulled pork sandwich is a must-try!</p>
+                <div class="tags">
+                    <span class="tag">Day/Night</span>
+                    <span class="tag">Industrial</span>
+                    <span class="tag">Cocktails</span>
+                    <span class="tag">Jewish Quarter</span>
+                </div>
+                <div class="price-range">💰 Budget</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>☕ Curated with love for Budapest coffee enthusiasts | Updated regularly with new discoveries</p>
+        </footer>
+    </div>
+
+    <script>
+        function filterShops(category) {
+            const cards = document.querySelectorAll('.coffee-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    if (card.dataset.category.includes(category)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                }
+            });
+        }
+
+        // Add some interactive effects
+        document.querySelectorAll('.coffee-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add a subtle parallax effect to the background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.body.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+        });
+    </script>
+</body>
+</html>
