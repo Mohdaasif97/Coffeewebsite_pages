@@ -9,7 +9,6 @@ A beautifully designed static website showcasing the best coffee shops in Budape
 - **Responsive Design** - Works seamlessly on all devices
 - **Interactive Filtering** - Filter coffee shops by category (Cozy, Modern, Traditional, Budget)
 - **Smooth Animations** - Floating cards, hover effects, and subtle parallax
-- **Coffee Shop Reviews** - Detailed reviews with ratings, tags, and pricing
 - **Modern UI** - Glassmorphism effects with warm coffee-inspired colors
 
 ## 📱 Deployment with GitHub Pages
